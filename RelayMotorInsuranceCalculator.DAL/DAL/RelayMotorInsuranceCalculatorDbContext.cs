@@ -25,7 +25,7 @@ namespace RelayMotorInsuranceCalculator.DAL.DAL
         /// The claims that a certain driver has.
         /// </summary>
         public DbSet<Claim> Claims { get; set; }
-        public RelayMotorInsuranceCalculatorDbContext() : base("default")
+        public RelayMotorInsuranceCalculatorDbContext() : base("RelayMotorInsuranceCalculatorDb")
         {
             Configuration.LazyLoadingEnabled = false;
         }
