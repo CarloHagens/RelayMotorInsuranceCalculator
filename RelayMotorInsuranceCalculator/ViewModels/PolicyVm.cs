@@ -7,5 +7,7 @@ namespace RelayMotorInsuranceCalculator.ViewModels
 {
     public class PolicyVm
     {
+        public List<DriverVm> Drivers { get; set; }
+        public DateTime StartDate { get; set; }
     }
 }

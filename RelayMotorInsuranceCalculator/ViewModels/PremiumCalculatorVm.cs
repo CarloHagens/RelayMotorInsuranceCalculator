@@ -5,9 +5,8 @@ using System.Web;
 
 namespace RelayMotorInsuranceCalculator.ViewModels
 {
-    public class ClaimVm
+    public class PremiumCalculatorVm
     {
-        public DriverVm Driver { get; set; }
-        public DateTime ClaimDate { get; set; }
+        public PolicyVm Policy { get; set; }
     }
 }

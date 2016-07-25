@@ -18,9 +18,16 @@ namespace RelayMotorInsuranceCalculator.Controllers
         {
             _premiumCalculationService = premiumCalculationService;
         }
-        public ActionResult PremiumCalculator(PolicyVm policyVm)
+        public ActionResult PremiumCalculator(PremiumCalculatorVm premiumCalculatorVm)
         {
-            return View();
+            premiumCalculatorVm = new PremiumCalculatorVm
+            {
+                Policy = new PolicyVm
+                {
+                    StartDate = DateTime.Today
+                }
+            };
+            return View(premiumCalculatorVm);
         }
     }
 }
