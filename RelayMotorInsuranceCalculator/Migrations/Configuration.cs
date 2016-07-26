@@ -1,4 +1,4 @@
-namespace RelayMotorInsuranceCalculator.DAL.Migrations
+namespace RelayMotorInsuranceCalculator.Migrations
 {
     using System;
     using System.Data.Entity;

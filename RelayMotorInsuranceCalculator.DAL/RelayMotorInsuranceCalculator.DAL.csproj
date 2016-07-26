@@ -54,11 +54,6 @@
     <Compile Include="Entities\Driver.cs" />
     <Compile Include="Entities\Enums\Occupation.cs" />
     <Compile Include="Entities\Policy.cs" />
-    <Compile Include="Migrations\201607251744450_Initial.cs" />
-    <Compile Include="Migrations\201607251744450_Initial.Designer.cs">
-      <DependentUpon>201607251744450_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,11 +61,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607251744450_Initial.resx">
-      <DependentUpon>201607251744450_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

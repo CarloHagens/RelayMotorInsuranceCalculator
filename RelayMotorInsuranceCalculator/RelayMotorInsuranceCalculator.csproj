@@ -142,6 +142,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\AgeCalculationHelper.cs" />
+    <Compile Include="Migrations\201607261014181_Initial.cs" />
+    <Compile Include="Migrations\201607261014181_Initial.Designer.cs">
+      <DependentUpon>201607261014181_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ClaimVm.cs" />
     <Compile Include="ViewModels\DriverVm.cs" />
@@ -221,6 +226,11 @@
       <Project>{f4a4dd3c-6b95-4f63-88d6-09a4fe0fd6fc}</Project>
       <Name>RelayMotorInsuranceCalculator.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201607261014181_Initial.resx">
+      <DependentUpon>201607261014181_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
