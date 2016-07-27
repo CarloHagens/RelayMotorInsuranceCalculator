@@ -12,5 +12,6 @@ namespace RelayMotorInsuranceCalculator.DAL.Entities.Enums
     public enum Occupation
     {
         Chauffeur, Accountant
+
     }
 }

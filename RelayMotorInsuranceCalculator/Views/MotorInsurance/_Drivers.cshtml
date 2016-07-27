@@ -2,12 +2,43 @@
 
 @for (int i = 0; i < Model.Policy.Drivers.Count; i++)
 {
-    <div class="col-md-4">
-        @Html.EditorFor(o => o.Policy.Drivers[i])
-    </div>
-    if (i % 3 == 2)
-    {
-        <div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">Driver</h4>
+                <div class="pull-right">
+                    @if (i == Model.Policy.Drivers.Count - 1 && Model.Policy.Drivers.Count < 5)
+                    {
+                        <button class="btn btn-default btn-success" onclick="AddDriver()" type="button">Add Driver</button>
+                    }
+                    @if (Model.Policy.Drivers.Count > 1)
+                    {
+                        <button class="btn btn-danger btn-sm" name="button" type="button" onclick="RemoveDriver('@i');"><span class="glyphicon glyphicon-remove"></span></button>
+                    }
+                </div>
+            </div>
+            <div class="panel-body">
+                @Html.EditorFor(o => o.Policy.Drivers[i])
+                @if (Model.Policy.Drivers[i].Claims?.Count > 0)
+                {
+                    for (int j = 0; j < Model.Policy.Drivers[i].Claims.Count; j++)
+                    {
+                        <div class="row">
+                            @Html.EditorFor(o => o.Policy.Drivers[i].Claims[j])
+                            <div class="col-md-2">
+                                <button class="btn btn-danger btn-sm" name="button" type="button" onclick="RemoveClaim('@i', '@j');"><span class="glyphicon glyphicon-remove"></span></button>
+                            </div>
+                        </div>
+                    }
+                }
+                @if (Model.Policy.Drivers[i].Claims == null || Model.Policy.Drivers[i].Claims.Count < 5)
+                {
+                    <div class="row">
+                        <button class="btn btn-default btn-danger" style="margin-left: 10px" onclick="AddClaim('@i')" type="button">Add Claim</button>
+                    </div>
+                }
+            </div>
         </div>
-    }
+
+    </div>
 }

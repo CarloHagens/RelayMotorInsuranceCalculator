@@ -11,11 +11,7 @@
     });
     $('.datepicker').datetimepicker({
         format: 'L',
-        locale: 'nl',
-        widgetPositioning: {
-            vertical: 'bottom',
-            horizontal: 'left'
-        },
+        locale: 'en-gb',
         showTodayButton: true
     });
     $('.timepicker').datetimepicker({

@@ -1,0 +1,11 @@
+﻿<script>
+    function ShowAlert(type, message) {
+        $('#alertArea').html("<div class='alert alert-dismissible' role='alert' id='alertMessage'><button type='button' class='close' data-dismiss='alert' id='alertDismiss'><span>&times;</span></button></div>");
+        $('#alertMessage').addClass('alert-' + type);
+        $('#alertMessage').append(message);
+        window.scrollTo(0, 0);
+    }
+    function DismissAlert() {
+        $('#alertDismiss').click();
+    }
+</script>

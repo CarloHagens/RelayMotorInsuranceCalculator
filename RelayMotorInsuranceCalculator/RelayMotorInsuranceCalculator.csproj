@@ -143,6 +143,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\MotorInsuranceController.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -216,6 +217,8 @@
     <Content Include="Views\MotorInsurance\PremiumCalculator.cshtml" />
     <Content Include="Views\MotorInsurance\EditorTemplates\DriverVm.cshtml" />
     <Content Include="Views\MotorInsurance\_Drivers.cshtml" />
+    <Content Include="Views\MotorInsurance\EditorTemplates\ClaimVm.cshtml" />
+    <Content Include="Views\Shared\_Alert.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

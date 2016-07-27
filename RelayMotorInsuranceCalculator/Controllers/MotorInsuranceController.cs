@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using AutoMapper;
 using RelayMotorInsuranceCalculator.DAL.Entities;
 using RelayMotorInsuranceCalculator.DAL.Entities.Enums;
+using RelayMotorInsuranceCalculator.Extensions;
 using RelayMotorInsuranceCalculator.Services;
 using RelayMotorInsuranceCalculator.Services.Models.Enums;
 using RelayMotorInsuranceCalculator.ViewModels;
@@ -32,7 +33,10 @@ namespace RelayMotorInsuranceCalculator.Controllers
                     StartDate = DateTime.Today,
                     Drivers = new List<DriverVm>
                     {
-                        new DriverVm()
+                        new DriverVm
+                        {
+                            DateOfBirth = DateTime.Today
+                        }
                     }
                 }
             };
@@ -42,7 +46,47 @@ namespace RelayMotorInsuranceCalculator.Controllers
         [HttpPost]
         public ActionResult AddDriver(PremiumCalculatorVm vm)
         {
-            vm.Policy.Drivers.Add(new DriverVm());
+            vm.Policy.Drivers.Add(new DriverVm
+            {
+                DateOfBirth = DateTime.Today
+            });
+            return PartialView("_Drivers", vm);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveDriver(PremiumCalculatorVm vm, int index)
+        {
+            var driverToRemove = vm.Policy.Drivers[index];
+            vm.Policy.Drivers.Remove(driverToRemove);
+            return PartialView("_Drivers", vm);
+        }
+
+        [HttpPost]
+        public ActionResult AddClaim(PremiumCalculatorVm vm, int index)
+        {
+            var driver = vm.Policy.Drivers[index];
+            if (driver.Claims == null)
+            {
+                driver.Claims = new List<ClaimVm>
+                {
+                    new ClaimVm
+                    {
+                        ClaimDate = DateTime.Today
+                    }
+                };
+            }
+            else
+            {
+                driver.Claims.Add(new ClaimVm());
+            }
+            return PartialView("_Drivers", vm);
+        }
+
+        [HttpPost]
+        public ActionResult RemoveClaim(PremiumCalculatorVm vm, int driver, int claim)
+        {
+            var claimToRemove = vm.Policy.Drivers[driver].Claims[claim];
+            vm.Policy.Drivers[driver].Claims.Remove(claimToRemove);
             return PartialView("_Drivers", vm);
         }
 
@@ -54,9 +98,9 @@ namespace RelayMotorInsuranceCalculator.Controllers
             if (!declined.PolicyDeclined)
             {
                 var premium = _premiumCalculationService.CalculatePremium(policy);
-                return Json(new { message = premium });
+                return Json(new { message = "Your policy premium would be: £" + decimal.Round(premium, 2), messageType = "success" });
             }
-            return Json(new { message = Enum.GetName(typeof(PolicyDeclineReason), declined.PolicyDeclineReason) });
+            return Json(new { message = "Unfortunately your policy has been declined with the reason: "+ declined.PolicyDeclineReason.GetDescription(), messageType = "danger" });
         }
     }
 }

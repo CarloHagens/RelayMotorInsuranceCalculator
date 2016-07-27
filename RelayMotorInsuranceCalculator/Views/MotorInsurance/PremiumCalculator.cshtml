@@ -5,18 +5,44 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/datepicker")
     <script>
-        $(function () {
-            $('#datetimepicker').datetimepicker({
-                locale: 'en-gb',
-                format: 'L',
-                showTodayButton: true
-            });
-        });
         function AddDriver() {
             $.ajax({
                 url: '/MotorInsurance/AddDriver',
                 type: "POST",
                 data: $("#Form").serialize(),
+                success: function(data) {
+                    $('#Drivers').html(data);
+                }
+            });
+        }
+
+        function RemoveDriver(index) {
+            $.ajax({
+                url: '/MotorInsurance/RemoveDriver',
+                type: "POST",
+                data: $("#Form").serialize() + "&index=" + index,
+                success: function (data) {
+                    $('#Drivers').html(data);
+                }
+            });
+        }
+
+        function AddClaim(index) {
+            $.ajax({
+                url: '/MotorInsurance/AddClaim',
+                type: "POST",
+                data: $("#Form").serialize() + "&index=" + index,
+                success: function(data) {
+                    $('#Drivers').html(data);
+                }
+            });
+        }
+
+        function RemoveClaim(driver, claim) {
+            $.ajax({
+                url: '/MotorInsurance/RemoveClaim',
+                type: "POST",
+                data: $("#Form").serialize() + "&driver=" + driver + "&claim=" + claim,
                 success: function (data) {
                     $('#Drivers').html(data);
                 }
@@ -29,8 +55,7 @@
                 type: "POST",
                 data: $("#Form").serialize(),
                 success: function (data) {
-                    alert(data.message);
-                    $('#message').html(data.message);
+                    ShowAlert(data.messageType, data.message);
                 }
             });
         }
@@ -50,7 +75,7 @@
         </div>
         <div class='col-md-3'>
             <div class="form-group">
-                <div class='input-group date' id='datetimepicker'>
+                <div class='input-group date datepicker'>
                     @Html.EditorFor(o => o.Policy.StartDate, new { htmlAttributes = new { @class = "form-control" } })
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
@@ -64,15 +89,6 @@
             @Html.Partial("_Drivers")
         </div>
     </div>
-    if (Model.Policy.Drivers.Count < 5)
-    {
-        <div class="row">
-            <div class="col-md-5">
-                <button class="btn btn-default btn-success pull-right" onclick="AddDriver()" type="button">Add Driver</button>
-            </div>
-
-        </div>
-    }
     <div class="row">
         <div id="message"></div>
         <div class="pull-right col-md-2">
