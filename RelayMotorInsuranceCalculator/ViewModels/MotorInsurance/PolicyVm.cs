@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace RelayMotorInsuranceCalculator.ViewModels
+namespace RelayMotorInsuranceCalculator.ViewModels.MotorInsurance
 {
     public class PolicyVm
     {

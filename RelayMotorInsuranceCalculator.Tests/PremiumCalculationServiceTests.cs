@@ -152,11 +152,11 @@ namespace RelayMotorInsuranceCalculator.Tests
                         {
                             new Claim
                             {
-                                ClaimDate = new DateTime(2015, 7, 21)
+                                ClaimDate = DateTime.Today.AddYears(-1).AddMonths(-1)
                             },
                             new Claim
                             {
-                                ClaimDate = new DateTime(2015, 7, 28)
+                                ClaimDate = DateTime.Today.AddYears(-1).AddMonths(1)
                             }
                         }
                     },
@@ -170,7 +170,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                         {
                             new Claim
                             {
-                                ClaimDate = new DateTime(2015, 12, 12)
+                                ClaimDate = DateTime.Today.AddYears(-1).AddMonths(6)
                             }
                         }
                     },
@@ -198,11 +198,11 @@ namespace RelayMotorInsuranceCalculator.Tests
                         {
                             new Claim
                             {
-                                ClaimDate = new DateTime(2015, 7, 21)
+                                ClaimDate = DateTime.Today.AddYears(-1).AddMonths(-1)
                             },
                             new Claim
                             {
-                                ClaimDate = new DateTime(2015, 7, 28)
+                                ClaimDate = DateTime.Today.AddYears(-1).AddMonths(1)
                             }
                         }
                     }

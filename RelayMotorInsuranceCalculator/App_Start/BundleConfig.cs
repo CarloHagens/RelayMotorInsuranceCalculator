@@ -26,7 +26,11 @@ namespace RelayMotorInsuranceCalculator
 
             bundles.Add(new ScriptBundle("~/bundles/datepicker").Include(
                 "~/Scripts/moment-with-locales.min.js",
-                "~/Scripts/bootstrap-datetimepicker.min.js"));
+                "~/Scripts/bootstrap-datetimepicker.min.js",
+                "~/Scripts/dates.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/knockout").Include(
+                "~/Scripts/knockout-3.4.0.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

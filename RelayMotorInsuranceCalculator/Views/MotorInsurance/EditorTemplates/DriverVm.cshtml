@@ -1,0 +1,43 @@
+﻿@model RelayMotorInsuranceCalculator.ViewModels.MotorInsurance.DriverVm
+
+
+<div class="row">
+    <div class="col-md-6">
+        First Name
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(o => o.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        Last Name
+    </div>
+    <div class="col-md-6">
+        @Html.EditorFor(o => o.LastName, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        Occupation
+    </div>
+    <div class="col-md-6">
+        @Html.EnumDropDownListFor(o => o.Occupation, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        Date of Birth
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker1'>
+                @Html.EditorFor(o => o.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

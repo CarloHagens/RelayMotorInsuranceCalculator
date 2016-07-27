@@ -1,0 +1,13 @@
+﻿@model RelayMotorInsuranceCalculator.ViewModels.MotorInsurance.PremiumCalculatorVm
+
+@for (int i = 0; i < Model.Policy.Drivers.Count; i++)
+{
+    <div class="col-md-4">
+        @Html.EditorFor(o => o.Policy.Drivers[i])
+    </div>
+    if (i % 3 == 2)
+    {
+        <div class="row">
+        </div>
+    }
+}

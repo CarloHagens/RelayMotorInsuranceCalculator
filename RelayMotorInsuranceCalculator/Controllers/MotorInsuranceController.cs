@@ -3,78 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using RelayMotorInsuranceCalculator.DAL.Entities;
 using RelayMotorInsuranceCalculator.DAL.Entities.Enums;
 using RelayMotorInsuranceCalculator.Services;
+using RelayMotorInsuranceCalculator.Services.Models.Enums;
 using RelayMotorInsuranceCalculator.ViewModels;
+using RelayMotorInsuranceCalculator.ViewModels.MotorInsurance;
 
 namespace RelayMotorInsuranceCalculator.Controllers
 {
     public class MotorInsuranceController : BaseController
     {
         private readonly IPremiumCalculationService _premiumCalculationService;
+        private readonly IMapper _mapper;
 
-        public MotorInsuranceController(IPremiumCalculationService premiumCalculationService)
+        public MotorInsuranceController(IPremiumCalculationService premiumCalculationService, IMapper mapper)
         {
             _premiumCalculationService = premiumCalculationService;
+            _mapper = mapper;
         }
-        public ActionResult PremiumCalculator(PremiumCalculatorVm premiumCalculatorVm)
+        public ActionResult PremiumCalculator()
         {
-            premiumCalculatorVm = new PremiumCalculatorVm
+            var vm = new PremiumCalculatorVm
             {
                 Policy = new PolicyVm
                 {
-                    StartDate = DateTime.Today
-                }
-            };
-            var policy = new Policy
-            {
-                StartDate = DateTime.Today.AddDays(1),
-                Drivers = new List<Driver>
-                {
-                    new Driver
+                    StartDate = DateTime.Today,
+                    Drivers = new List<DriverVm>
                     {
-                        FirstName = "Carlo",
-                        LastName = "Hagens",
-                        DateOfBirth = new DateTime(1991, 1, 12),
-                        Occupation = Occupation.Accountant,
-                        Claims = new List<Claim>()
-                        {
-                            new Claim
-                            {
-                                ClaimDate = new DateTime(2015, 7, 21)
-                            },
-                            new Claim
-                            {
-                                ClaimDate = new DateTime(2015, 7, 28)
-                            }
-                        }
-                    },
-                    new Driver
-                    {
-                        FirstName = "Nicky",
-                        LastName = "Ernste",
-                        DateOfBirth = new DateTime(1992, 2, 24),
-                        Occupation =  Occupation.Chauffeur,
-                        Claims = new List<Claim>
-                        {
-                            new Claim
-                            {
-                                ClaimDate = new DateTime(2015, 12, 12)
-                            }
-                        }
-                    },
-                    new Driver
-                    {
-                        FirstName = "Roy",
-                        LastName = "Cleven",
-                        DateOfBirth = new DateTime(1994, 5, 23),
-                        Occupation =  Occupation.Chauffeur
+                        new DriverVm()
                     }
                 }
             };
-            _premiumCalculationService.CalculatePremium(policy);
-            return View(premiumCalculatorVm);
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult AddDriver(PremiumCalculatorVm vm)
+        {
+            vm.Policy.Drivers.Add(new DriverVm());
+            return PartialView("_Drivers", vm);
+        }
+
+        [HttpPost]
+        public JsonResult Calculate(PremiumCalculatorVm vm)
+        {
+            var policy = _mapper.Map<Policy>(vm.Policy);
+            var declined = _premiumCalculationService.DetermineIfPolicyShouldBeDeclined(policy);
+            if (!declined.PolicyDeclined)
+            {
+                var premium = _premiumCalculationService.CalculatePremium(policy);
+                return Json(new { message = premium });
+            }
+            return Json(new { message = Enum.GetName(typeof(PolicyDeclineReason), declined.PolicyDeclineReason) });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model RelayMotorInsuranceCalculator.ViewModels.PremiumCalculatorVm
+﻿@using RelayMotorInsuranceCalculator.DAL.Entities
+@model RelayMotorInsuranceCalculator.ViewModels.MotorInsurance.PremiumCalculatorVm
 
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -11,13 +12,28 @@
                 showTodayButton: true
             });
         });
+        function AddDriver() {
+            $.ajax({
+                url: '/MotorInsurance/AddDriver',
+                type: "POST",
+                data: $("#Form").serialize(),
+                success: function (data) {
+                    $('#Drivers').html(data);
+                }
+            });
+        }
 
-        $.post('/Timesheet/SubmitTimesheet', { date: date, vm: vm }, function (result) {
-            if (result && result.errorMessage && result.errorType) {
-                ShowAlert(result.errorType, result.errorMessage);
-            }
-            $.unblockUI();
-        });
+        function Calculate() {
+            $.ajax({
+                url: '/MotorInsurance/Calculate',
+                type: "POST",
+                data: $("#Form").serialize(),
+                success: function (data) {
+                    alert(data.message);
+                    $('#message').html(data.message);
+                }
+            });
+        }
     </script>
 }
 
@@ -25,24 +41,43 @@
 <div class="row">
     <h2>Motor Insurance Premium Calculation</h2>
 </div>
-<div class="row">
-    <div class="col-md-2">
-        Policy Start Date
-    </div>
-    <div class='col-md-3'>
-        <div class="form-group">
-            <div class='input-group date' id='datetimepicker'>
-                @Html.EditorFor(o => o.Policy.StartDate, new {htmlAttributes = new {@class = "form-control"}})
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
+@using (Html.BeginForm("Calculate", "MotorInsurance", FormMethod.Post, new { id = "Form" }))
+{
+    @Html.EditorFor(o => o)
+    <div class="row">
+        <div class="col-md-2">
+            Policy Start Date
+        </div>
+        <div class='col-md-3'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker'>
+                    @Html.EditorFor(o => o.Policy.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="pull-right col-md-2">
-        <button class="btn btn-default" type="submit">Calculate</button>
+    <div class="row">
+        <div id="Drivers">
+            @Html.Partial("_Drivers")
+        </div>
     </div>
-</div>
+    if (Model.Policy.Drivers.Count < 5)
+    {
+        <div class="row">
+            <div class="col-md-5">
+                <button class="btn btn-default btn-success pull-right" onclick="AddDriver()" type="button">Add Driver</button>
+            </div>
+
+        </div>
+    }
+    <div class="row">
+        <div id="message"></div>
+        <div class="pull-right col-md-2">
+            <button class="btn btn-default btn-success" onclick="Calculate()" type="button">Calculate</button>
+        </div>
+    </div>
+}
 
