@@ -77,7 +77,10 @@ namespace RelayMotorInsuranceCalculator.Controllers
             }
             else
             {
-                driver.Claims.Add(new ClaimVm());
+                driver.Claims.Add(new ClaimVm
+                {
+                    ClaimDate = DateTime.Today
+                });
             }
             return PartialView("_Drivers", vm);
         }

@@ -10,8 +10,14 @@
                 url: '/MotorInsurance/AddDriver',
                 type: "POST",
                 data: $("#Form").serialize(),
-                success: function(data) {
+                success: function (data) {
                     $('#Drivers').html(data);
+
+                    $('.datepicker').datetimepicker({
+                        format: 'L',
+                        locale: 'en-gb',
+                        showTodayButton: true
+                    });
                 }
             });
         }
@@ -23,6 +29,12 @@
                 data: $("#Form").serialize() + "&index=" + index,
                 success: function (data) {
                     $('#Drivers').html(data);
+
+                    $('.datepicker').datetimepicker({
+                        format: 'L',
+                        locale: 'en-gb',
+                        showTodayButton: true
+                    });
                 }
             });
         }
@@ -32,8 +44,14 @@
                 url: '/MotorInsurance/AddClaim',
                 type: "POST",
                 data: $("#Form").serialize() + "&index=" + index,
-                success: function(data) {
+                success: function (data) {
                     $('#Drivers').html(data);
+
+                    $('.datepicker').datetimepicker({
+                        format: 'L',
+                        locale: 'en-gb',
+                        showTodayButton: true
+                    });
                 }
             });
         }
@@ -45,6 +63,12 @@
                 data: $("#Form").serialize() + "&driver=" + driver + "&claim=" + claim,
                 success: function (data) {
                     $('#Drivers').html(data);
+
+                    $('.datepicker').datetimepicker({
+                        format: 'L',
+                        locale: 'en-gb',
+                        showTodayButton: true
+                    });
                 }
             });
         }
@@ -55,6 +79,11 @@
                 type: "POST",
                 data: $("#Form").serialize(),
                 success: function (data) {
+                    $('.datepicker').datetimepicker({
+                        format: 'L',
+                        locale: 'en-gb',
+                        showTodayButton: true
+                    });
                     ShowAlert(data.messageType, data.message);
                 }
             });
