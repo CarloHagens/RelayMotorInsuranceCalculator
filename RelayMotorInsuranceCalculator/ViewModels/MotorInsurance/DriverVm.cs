@@ -12,6 +12,7 @@ namespace RelayMotorInsuranceCalculator.ViewModels.MotorInsurance
         [Required]
         [MinLength(3)]
         [MaxLength(30)]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Please enter a valid name")]
         public string Name { get; set; }
         
         [Required]
