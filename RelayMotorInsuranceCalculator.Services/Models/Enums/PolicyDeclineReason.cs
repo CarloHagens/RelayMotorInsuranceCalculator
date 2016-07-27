@@ -7,15 +7,15 @@ namespace RelayMotorInsuranceCalculator.Services.Models.Enums
     /// </summary>
     public enum PolicyDeclineReason
     {
-        [Description("The policy start date is before the current date.")]
+        [Description("Start Date of Policy")]
         StartDateBeforeCurrentDate,
-        [Description("The youngest driver on the policy is below the age of 21.")]
+        [Description("Age of Youngest Driver")]
         YoungestDriverTooYoung,
-        [Description("The oldest driver on the policy is above the age of 75.")]
+        [Description("Age of Oldest Driver")]
         OldestDriverTooOld,
-        [Description("One of the drivers has 3 or more claims.")]
+        [Description("Driver has more than 2 claims")]
         SingleDriverMoreThanTwoClaims,
-        [Description("Combined the drivers have 4 or more claims.")]
+        [Description("Policy has more than 3 claims")]
         TotalMoreThanThreeClaims
     }
 }

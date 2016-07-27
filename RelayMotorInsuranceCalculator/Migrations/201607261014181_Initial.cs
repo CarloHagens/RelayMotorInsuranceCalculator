@@ -33,7 +33,7 @@ namespace RelayMotorInsuranceCalculator.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Policies", t => t.PolicyId, cascadeDelete: true)
                 .Index(t => t.PolicyId);
-            Sql("ALTER TABLE [dbo].[Drivers] ADD [FullName] AS [FirstName] + ' ' + [LastName]");
+            Sql("ALTER TABLE [dbo].[Drivers] ADD [FullName] AS [Name] + ' ' + [LastName]");
             CreateTable(
                 "dbo.Policies",
                 c => new

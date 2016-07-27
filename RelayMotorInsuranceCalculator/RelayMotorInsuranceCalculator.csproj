@@ -152,6 +152,10 @@
     <Compile Include="Migrations\201607261014181_Initial.Designer.cs">
       <DependentUpon>201607261014181_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607272253066_RemovedLastName.cs" />
+    <Compile Include="Migrations\201607272253066_RemovedLastName.Designer.cs">
+      <DependentUpon>201607272253066_RemovedLastName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MotorInsurance\ClaimVm.cs" />
@@ -240,6 +244,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607261014181_Initial.resx">
       <DependentUpon>201607261014181_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607272253066_RemovedLastName.resx">
+      <DependentUpon>201607272253066_RemovedLastName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

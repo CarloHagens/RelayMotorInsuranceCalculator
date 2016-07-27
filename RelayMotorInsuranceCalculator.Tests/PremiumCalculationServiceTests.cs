@@ -29,8 +29,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                 {
                     new Driver
                     {
-                        FirstName = "Carlo",
-                        LastName = "Hagens",
+                        Name = "Carlo",
                         DateOfBirth = new DateTime(1991, 1, 12),
                         Occupation = Occupation.Accountant
                     }
@@ -43,8 +42,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                 {
                     new Driver
                     {
-                        FirstName = "Carlo",
-                        LastName = "Hagens",
+                        Name = "Carlo",
                         DateOfBirth = new DateTime(1998, 1, 12),
                         Occupation = Occupation.Accountant
                     }
@@ -57,8 +55,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                 {
                     new Driver
                     {
-                        FirstName = "Carlo",
-                        LastName = "Hagens",
+                        Name = "Carlo",
                         DateOfBirth = new DateTime(1925, 1, 12),
                         Occupation = Occupation.Accountant
                     }
@@ -71,8 +68,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                 {
                     new Driver
                     {
-                        FirstName = "Carlo",
-                        LastName = "Hagens",
+                        Name = "Carlo",
                         DateOfBirth = new DateTime(1991, 1, 12),
                         Occupation = Occupation.Accountant,
                         Claims = new List<Claim>()
@@ -101,8 +97,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                 {
                     new Driver
                     {
-                        FirstName = "Carlo",
-                        LastName = "Hagens",
+                        Name = "Carlo",
                         DateOfBirth = new DateTime(1991, 1, 12),
                         Occupation = Occupation.Accountant,
                         Claims = new List<Claim>()
@@ -119,8 +114,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                     },
                     new Driver
                     {
-                        FirstName = "Nicky",
-                        LastName = "Ernste",
+                        Name = "Nicky",
                         DateOfBirth = new DateTime(1992, 2, 24),
                         Occupation =  Occupation.Chauffeur,
                         Claims = new List<Claim>
@@ -144,8 +138,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                 {
                     new Driver
                     {
-                        FirstName = "Carlo",
-                        LastName = "Hagens",
+                        Name = "Carlo",
                         DateOfBirth = new DateTime(1991, 1, 12),
                         Occupation = Occupation.Accountant,
                         Claims = new List<Claim>()
@@ -162,8 +155,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                     },
                     new Driver
                     {
-                        FirstName = "Nicky",
-                        LastName = "Ernste",
+                        Name = "Nicky",
                         DateOfBirth = new DateTime(1992, 2, 24),
                         Occupation =  Occupation.Chauffeur,
                         Claims = new List<Claim>
@@ -176,8 +168,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                     },
                     new Driver
                     {
-                        FirstName = "Roy",
-                        LastName = "Cleven",
+                        Name = "Roy",
                         DateOfBirth = new DateTime(1994, 5, 23),
                         Occupation =  Occupation.Chauffeur
                     }
@@ -190,8 +181,7 @@ namespace RelayMotorInsuranceCalculator.Tests
                 {
                     new Driver
                     {
-                        FirstName = "Carlo",
-                        LastName = "Hagens",
+                        Name = "Carlo",
                         DateOfBirth = new DateTime(1985, 1, 12),
                         Occupation = Occupation.Accountant,
                         Claims = new List<Claim>()

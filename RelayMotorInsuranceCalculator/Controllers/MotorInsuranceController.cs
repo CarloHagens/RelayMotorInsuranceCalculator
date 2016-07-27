@@ -101,9 +101,31 @@ namespace RelayMotorInsuranceCalculator.Controllers
             if (!declined.PolicyDeclined)
             {
                 var premium = _premiumCalculationService.CalculatePremium(policy);
-                return Json(new { message = "Your policy premium would be: £" + decimal.Round(premium, 2), messageType = "success" });
+                return Json(new { message = "Your policy premium will be: £" + decimal.Round(premium, 2), messageType = "success" });
             }
-            return Json(new { message = "Unfortunately your policy has been declined with the reason: "+ declined.PolicyDeclineReason.GetDescription(), messageType = "danger" });
+            string declineMessage = "";
+            switch (declined.PolicyDeclineReason)
+            {
+                case PolicyDeclineReason.YoungestDriverTooYoung:
+                    var youngestDriverName = vm.Policy.Drivers.OrderByDescending(o => o.DateOfBirth).First().Name;
+                    declineMessage = declined.PolicyDeclineReason.GetDescription() + ' ' + youngestDriverName;
+                    break;
+                case PolicyDeclineReason.OldestDriverTooOld:
+                    var oldestDriverName = vm.Policy.Drivers.OrderBy(o => o.DateOfBirth).First().Name;
+                    declineMessage = declined.PolicyDeclineReason.GetDescription() + ' ' + oldestDriverName;
+                    break;
+                case PolicyDeclineReason.SingleDriverMoreThanTwoClaims:
+                    var driverWithTooManyClaims = vm.Policy.Drivers.Find(o => o.Claims.Count > 2).Name;
+                    declineMessage = declined.PolicyDeclineReason.GetDescription() + ' ' + driverWithTooManyClaims;
+                    break;
+                case PolicyDeclineReason.TotalMoreThanThreeClaims:
+                    declineMessage = declined.PolicyDeclineReason.GetDescription();
+                    break;
+                case PolicyDeclineReason.StartDateBeforeCurrentDate:
+                    declineMessage = declined.PolicyDeclineReason.GetDescription();
+                    break;
+            }
+            return Json(new { message = "Unfortunately your policy has been declined with the reason: " + declineMessage, messageType = "danger" });
         }
     }
 }

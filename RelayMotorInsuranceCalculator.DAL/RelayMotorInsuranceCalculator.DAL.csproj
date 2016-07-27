@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\RelayMotorInsuranceCalculatorDbContext.cs" />
+    <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Claim.cs" />
     <Compile Include="Entities\Driver.cs" />
     <Compile Include="Entities\Enums\Occupation.cs" />

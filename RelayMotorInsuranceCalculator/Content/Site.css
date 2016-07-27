@@ -22,3 +22,32 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.panel-default > .panel-heading {
+    color: white;
+    background-color: #23798A;
+    border-color: #ddd;
+}
+
+.btn-primary {
+    color: white;
+    background-color: #C59E4B;
+    border-color: #C59E4B;
+}
+
+    .btn-primary:hover {
+        color: white;
+        background-color: #DBB552;
+        border-color: #DBB552;
+        -webkit-transition: all 250ms ease;
+        -moz-transition: all 250ms ease;
+        -ms-transition: all 250ms ease;
+        -o-transition: all 250ms ease;
+        transition: all 250ms ease;
+    }
+
+    .btn-primary:focus {
+        color: white;
+        background-color: #C59E4B;
+        border-color: #C59E4B;
+    }

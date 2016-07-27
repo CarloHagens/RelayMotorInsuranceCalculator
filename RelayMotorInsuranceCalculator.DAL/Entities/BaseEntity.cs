@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace RelayMotorInsuranceCalculator.DAL.Entities
 {
-    public class Policy : BaseEntity
+    public class BaseEntity
     {
-        [DataType(DataType.DateTime)]
-        public DateTime StartDate { get; set; }
-        public virtual ICollection<Driver> Drivers { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
     }
 }

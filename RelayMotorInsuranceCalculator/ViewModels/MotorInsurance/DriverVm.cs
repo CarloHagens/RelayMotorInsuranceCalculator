@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using RelayMotorInsuranceCalculator.DAL.Entities.Enums;
 
 namespace RelayMotorInsuranceCalculator.ViewModels.MotorInsurance
@@ -8,13 +9,14 @@ namespace RelayMotorInsuranceCalculator.ViewModels.MotorInsurance
     {
         public List<ClaimVm> Claims { get; set; }
         public PolicyVm Policy { get; set; }
-
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-
-        public string FullName => FirstName + ' ' + LastName;
-
+        [Required]
+        [MinLength(3)]
+        [MaxLength(30)]
+        public string Name { get; set; }
+        
+        [Required]
         public Occupation Occupation { get; set; }
+        [Required]
         public DateTime DateOfBirth { get; set; }
     }
 }

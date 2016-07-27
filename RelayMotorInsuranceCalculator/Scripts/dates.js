@@ -1,34 +1,24 @@
 ﻿$(function () {
-    $('.datetimepicker').datetimepicker({
-        locale: 'nl',
-        date: moment(),
-        format: 'DD-MM-YYYY HH:mm zz',
-        widgetPositioning: {
-            vertical: 'bottom',
-            horizontal: 'left'
-        },
-        showTodayButton: true
+    $('.claimdatepicker').datetimepicker({
+        format: 'L',
+        locale: 'en-gb',
+        showTodayButton: true,
+        minDate: moment().subtract(5, 'years'),
+        maxDate: moment()
     });
+    $('.agedatepicker').datetimepicker({
+        format: 'L',
+        locale: 'en-gb',
+        minDate: moment().subtract(130, 'years'),
+        maxDate: moment().subtract(5, 'years')
+
+    });
+
     $('.datepicker').datetimepicker({
         format: 'L',
         locale: 'en-gb',
         showTodayButton: true
-    });
-    $('.timepicker').datetimepicker({
-        format: 'LT',
-        locale: 'nl',
-        date: moment(),
-        widgetPositioning: {
-            vertical: 'bottom',
-            horizontal: 'left'
-        },
-        showTodayButton: true
-    });
-    $('.datepickerinline').datetimepicker({
-        format: 'L',
-        locale: 'nl',
-        inline: true,
-        showTodayButton: true
+
     });
     $.validator.addMethod('date',
         function (value) {

@@ -9,21 +9,11 @@ using RelayMotorInsuranceCalculator.DAL.Entities.Enums;
 
 namespace RelayMotorInsuranceCalculator.DAL.Entities
 {
-    public class Driver
+    public class Driver : BaseEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-
-        // Sql("ALTER TABLE [dbo].[Driver] ADD [FullName] AS [FirstName] + [LastName]");
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public string FullName { get; set; }
         [Required]
         [MaxLength(30)]
-        public string FirstName { get; set; }
-        [Required]
-        [MaxLength(30)]
-        public string LastName { get; set; }
+        public string Name { get; set; }
         [Required]
         public Occupation Occupation { get; set; }
         [Required]

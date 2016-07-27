@@ -12,12 +12,7 @@
                 data: $("#Form").serialize(),
                 success: function (data) {
                     $('#Drivers').html(data);
-
-                    $('.datepicker').datetimepicker({
-                        format: 'L',
-                        locale: 'en-gb',
-                        showTodayButton: true
-                    });
+                    ReloadPickerValidation();
                 }
             });
         }
@@ -29,12 +24,7 @@
                 data: $("#Form").serialize() + "&index=" + index,
                 success: function (data) {
                     $('#Drivers').html(data);
-
-                    $('.datepicker').datetimepicker({
-                        format: 'L',
-                        locale: 'en-gb',
-                        showTodayButton: true
-                    });
+                    ReloadPickerValidation();
                 }
             });
         }
@@ -46,12 +36,7 @@
                 data: $("#Form").serialize() + "&index=" + index,
                 success: function (data) {
                     $('#Drivers').html(data);
-
-                    $('.datepicker').datetimepicker({
-                        format: 'L',
-                        locale: 'en-gb',
-                        showTodayButton: true
-                    });
+                    ReloadPickerValidation();
                 }
             });
         }
@@ -63,46 +48,58 @@
                 data: $("#Form").serialize() + "&driver=" + driver + "&claim=" + claim,
                 success: function (data) {
                     $('#Drivers').html(data);
-
-                    $('.datepicker').datetimepicker({
-                        format: 'L',
-                        locale: 'en-gb',
-                        showTodayButton: true
-                    });
+                    ReloadPickerValidation();
                 }
             });
         }
 
         function Calculate() {
-            $.ajax({
-                url: '/MotorInsurance/Calculate',
-                type: "POST",
-                data: $("#Form").serialize(),
-                success: function (data) {
-                    $('.datepicker').datetimepicker({
-                        format: 'L',
-                        locale: 'en-gb',
-                        showTodayButton: true
-                    });
-                    ShowAlert(data.messageType, data.message);
-                }
+            if ($('#Form').valid()) {
+                $.ajax({
+                    url: '/MotorInsurance/Calculate',
+                    type: "POST",
+                    data: $("#Form").serialize(),
+                    success: function (data) {
+                        ReloadPickerValidation();
+                        ShowAlert(data.messageType, data.message);
+                    }
+                });
+            }
+        }
+
+        function ReloadPickerValidation() {
+            $('#Form').removeData('unobtrusiveValidation');
+            $('#Form').removeData('validator');
+            $.validator.unobtrusive.parse('#Form');
+            $('.agedatepicker').datetimepicker({
+                format: 'L',
+                locale: 'en-gb',
+                minDate: moment().subtract(130, 'years'),
+                maxDate: moment().subtract(5, 'years')
+
+            });
+            $('.claimdatepicker').datetimepicker({
+                format: 'L',
+                locale: 'en-gb',
+                showTodayButton: true,
+                minDate: moment().subtract(5, 'years'),
+                maxDate: moment()
             });
         }
     </script>
 }
 
 
-<div class="row">
+<div class="row" style="margin-left: 10px; margin-bottom: 10px">
     <h2>Motor Insurance Premium Calculation</h2>
 </div>
 @using (Html.BeginForm("Calculate", "MotorInsurance", FormMethod.Post, new { id = "Form" }))
 {
-    @Html.EditorFor(o => o)
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2" style="margin-top: 7px;margin-left: 12px">
             Policy Start Date
         </div>
-        <div class='col-md-3'>
+        <div class='col-md-2' style="margin-left: -7px;">
             <div class="form-group">
                 <div class='input-group date datepicker'>
                     @Html.EditorFor(o => o.Policy.StartDate, new { htmlAttributes = new { @class = "form-control" } })
@@ -113,7 +110,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" style="margin-top:25px">
         <div id="Drivers">
             @Html.Partial("_Drivers")
         </div>
@@ -121,7 +118,7 @@
     <div class="row">
         <div id="message"></div>
         <div class="pull-right col-md-2">
-            <button class="btn btn-default btn-success" onclick="Calculate()" type="button">Calculate</button>
+            <button class="btn btn-default btn-primary" onclick="Calculate()" type="button">Calculate</button>
         </div>
     </div>
 }
