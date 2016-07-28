@@ -50,6 +50,7 @@ namespace RelayMotorInsuranceCalculator.Controllers
             {
                 DateOfBirth = DateTime.Today
             });
+            ViewData.ModelState.Clear();
             return PartialView("_Drivers", vm);
         }
 
@@ -58,6 +59,7 @@ namespace RelayMotorInsuranceCalculator.Controllers
         {
             var driverToRemove = vm.Policy.Drivers[index];
             vm.Policy.Drivers.Remove(driverToRemove);
+            ViewData.ModelState.Clear();
             return PartialView("_Drivers", vm);
         }
 
@@ -82,6 +84,7 @@ namespace RelayMotorInsuranceCalculator.Controllers
                     ClaimDate = DateTime.Today
                 });
             }
+            ViewData.ModelState.Clear();
             return PartialView("_Drivers", vm);
         }
 
@@ -90,6 +93,7 @@ namespace RelayMotorInsuranceCalculator.Controllers
         {
             var claimToRemove = vm.Policy.Drivers[driver].Claims[claim];
             vm.Policy.Drivers[driver].Claims.Remove(claimToRemove);
+            ViewData.ModelState.Clear();
             return PartialView("_Drivers", vm);
         }
 
@@ -101,6 +105,7 @@ namespace RelayMotorInsuranceCalculator.Controllers
             if (!declined.PolicyDeclined)
             {
                 var premium = _premiumCalculationService.CalculatePremium(policy);
+                ViewData.ModelState.Clear();
                 return Json(new { message = "Your policy premium will be: £" + decimal.Round(premium, 2), messageType = "success" });
             }
             string declineMessage = "";
@@ -125,6 +130,7 @@ namespace RelayMotorInsuranceCalculator.Controllers
                     declineMessage = declined.PolicyDeclineReason.GetDescription();
                     break;
             }
+            ViewData.ModelState.Clear();
             return Json(new { message = "Unfortunately your policy has been declined with the reason: " + declineMessage, messageType = "danger" });
         }
     }
