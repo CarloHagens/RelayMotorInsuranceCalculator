@@ -10,7 +10,7 @@
         format: 'L',
         locale: 'en-gb',
         minDate: moment().subtract(130, 'years'),
-        maxDate: moment().subtract(5, 'years')
+        maxDate: moment()
 
     });
 
