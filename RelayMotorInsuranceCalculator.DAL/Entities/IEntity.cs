@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace RelayMotorInsuranceCalculator.DAL.Entities
 {
-    public class BaseEntity : IEntity
+    public interface IEntity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
+        Guid Id { get; set; }
     }
 }

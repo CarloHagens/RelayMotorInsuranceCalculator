@@ -24,6 +24,7 @@ namespace RelayMotorInsuranceCalculator.Controllers
             _premiumCalculationService = premiumCalculationService;
             _mapper = mapper;
         }
+
         public ActionResult PremiumCalculator()
         {
             var vm = new PremiumCalculatorVm
@@ -42,7 +43,7 @@ namespace RelayMotorInsuranceCalculator.Controllers
             };
             return View(vm);
         }
-
+        
         [HttpPost]
         public ActionResult AddDriver(PremiumCalculatorVm vm)
         {
@@ -106,7 +107,7 @@ namespace RelayMotorInsuranceCalculator.Controllers
             {
                 var premium = _premiumCalculationService.CalculatePremium(policy);
                 ViewData.ModelState.Clear();
-                return Json(new { message = "Your policy premium will be: £" + decimal.Round(premium, 2), messageType = "success" });
+                return Json(new { message = $"Your policy premium will be: £{decimal.Round(premium,2)}", messageType = "success" });
             }
             string declineMessage = "";
             switch (declined.PolicyDeclineReason)
@@ -131,7 +132,7 @@ namespace RelayMotorInsuranceCalculator.Controllers
                     break;
             }
             ViewData.ModelState.Clear();
-            return Json(new { message = "Unfortunately your policy has been declined with the reason: " + declineMessage, messageType = "danger" });
+            return Json(new { message = $"Unfortunately your policy has been declined with the reason: {declineMessage}", messageType = "danger" });
         }
     }
 }

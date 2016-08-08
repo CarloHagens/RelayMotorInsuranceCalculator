@@ -18,10 +18,16 @@ namespace RelayMotorInsuranceCalculator.Tests
         private readonly Policy _policy5;
         private readonly Policy _policy6;
         private readonly Policy _policy7;
+        private readonly IPremiumCalculationService _premiumCalculationService;
 
 
+
+        /// <summary>
+        /// Initializes a couple of policies, each with different details.
+        /// </summary>
         public PremiumCalculationServiceTests()
         {
+            _premiumCalculationService = new PremiumCalculationService();
             _policy1 = new Policy
             {
                 StartDate = DateTime.Today.AddDays(-1),
@@ -199,61 +205,52 @@ namespace RelayMotorInsuranceCalculator.Tests
                 }
             };
         }
-        [TestMethod]
-        public void DeclineCalculationTest()
-        {
-            var premiumCalculationService = new PremiumCalculationService();
 
-            var policyDeclined = premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy1);
+        /// <summary>
+        /// Tests whether the policy is declined and if it is declined for the correct reason.
+        /// </summary>
+        [TestMethod]
+        public void DeclineDeterminationTest()
+        {
+            var policyDeclined = _premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy1);
             Assert.AreEqual(policyDeclined.PolicyDeclined, true);
             Assert.AreEqual(policyDeclined.PolicyDeclineReason, PolicyDeclineReason.StartDateBeforeCurrentDate);
 
 
-            policyDeclined = premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy2);
+            policyDeclined = _premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy2);
             Assert.AreEqual(policyDeclined.PolicyDeclined, true);
             Assert.AreEqual(policyDeclined.PolicyDeclineReason, PolicyDeclineReason.YoungestDriverTooYoung);
 
-            policyDeclined = premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy3);
+            policyDeclined = _premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy3);
             Assert.AreEqual(policyDeclined.PolicyDeclined, true);
             Assert.AreEqual(policyDeclined.PolicyDeclineReason, PolicyDeclineReason.OldestDriverTooOld);
 
-            policyDeclined = premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy4);
+            policyDeclined = _premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy4);
             Assert.AreEqual(policyDeclined.PolicyDeclined, true);
             Assert.AreEqual(policyDeclined.PolicyDeclineReason, PolicyDeclineReason.SingleDriverMoreThanTwoClaims);
 
-            policyDeclined = premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy5);
+            policyDeclined = _premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy5);
             Assert.AreEqual(policyDeclined.PolicyDeclined, true);
             Assert.AreEqual(policyDeclined.PolicyDeclineReason, PolicyDeclineReason.TotalMoreThanThreeClaims);
 
-            policyDeclined = premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy6);
+            policyDeclined = _premiumCalculationService.DetermineIfPolicyShouldBeDeclined(_policy6);
             Assert.AreEqual(policyDeclined.PolicyDeclined, false);
             Assert.AreEqual(policyDeclined.PolicyDeclineReason, null);
         }
 
+        /// <summary>
+        /// Tests whether the premium calculation returns the correct values for each policy.
+        /// </summary>
         [TestMethod]
         public void PremiumCalculationTest()
         {
-            var premiumCalculationService = new PremiumCalculationService();
-
-            var policyPremium = premiumCalculationService.CalculatePremium(_policy1);
+            var policyPremium = _premiumCalculationService.CalculatePremium(_policy5);
             Assert.AreEqual(policyPremium, -1);
 
-            policyPremium = premiumCalculationService.CalculatePremium(_policy2);
-            Assert.AreEqual(policyPremium, -1);
-
-            policyPremium = premiumCalculationService.CalculatePremium(_policy3);
-            Assert.AreEqual(policyPremium, -1);
-
-            policyPremium = premiumCalculationService.CalculatePremium(_policy4);
-            Assert.AreEqual(policyPremium, -1);
-
-            policyPremium = premiumCalculationService.CalculatePremium(_policy5);
-            Assert.AreEqual(policyPremium, -1);
-
-            policyPremium = premiumCalculationService.CalculatePremium(_policy6);
+            policyPremium = _premiumCalculationService.CalculatePremium(_policy6);
             Assert.AreEqual(policyPremium, 990);
 
-            policyPremium = premiumCalculationService.CalculatePremium(_policy7);
+            policyPremium = _premiumCalculationService.CalculatePremium(_policy7);
             Assert.AreEqual(policyPremium, 526.5m);
         }
     }

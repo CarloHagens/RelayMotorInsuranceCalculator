@@ -54,6 +54,7 @@
     <Compile Include="Entities\Claim.cs" />
     <Compile Include="Entities\Driver.cs" />
     <Compile Include="Entities\Enums\Occupation.cs" />
+    <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\Policy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
